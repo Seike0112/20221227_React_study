@@ -1,25 +1,22 @@
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter, Link } from "react-router-dom";
 
-function App() {
+// Routerコンポーネントの切り出し
+import { Router } from "./Router/Router";
+
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <div className="App">
+        <Link to="/">Home</Link>
+        <br />
+        <Link to="/page1">Page1</Link>
+        <br />
+        <Link to="/page2">Page2</Link>
+        <br />
+      </div>
+      <Router />
+    </BrowserRouter>
   );
-}
+};
 
 export default App;
