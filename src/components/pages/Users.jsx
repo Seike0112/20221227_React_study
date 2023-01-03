@@ -1,8 +1,16 @@
+import { memo } from "react";
 import styled from "styled-components";
+import { useRecoilState } from "recoil";
+
+import { SecondaryButton } from "../atom/button/SecondaryButton";
+
 import { SearchInput } from "../molecules/SearchInput";
 import { UserCard } from "../organisms/user/UserCard";
+import { userState } from "../../store/userState";
 
 const users = [...Array(10).keys()].map((val) => {
+  console.log("Users");
+
   return {
     id: val,
     name: `test-${val}`,
@@ -17,11 +25,17 @@ const users = [...Array(10).keys()].map((val) => {
   };
 });
 
-export const Users = () => {
+export const Users = memo(() => {
+  const [ userInfo, setUserInfo ] = useRecoilState(userState);
+
+  const onClickSwitch = () => setUserInfo({ isAdmin: !userInfo.isAdmin });
+
   return (
     <SContainer>
       <h2>ユーザー一覧</h2>
       <SearchInput />
+      <br />
+      <SecondaryButton onClick={onClickSwitch}>切り替え</SecondaryButton>
       <SUserArea>
         {users.map((user) => (
           <UserCard key={user.id} user={user} />
@@ -29,7 +43,7 @@ export const Users = () => {
       </SUserArea>
     </SContainer>
   );
-};
+});
 
 const SContainer = styled.div`
   display: flex;
