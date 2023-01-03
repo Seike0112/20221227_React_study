@@ -5,11 +5,10 @@ import { RecoilRoot } from "recoil";
 
 const App = () => {
   return (
-    <RecoilRoot>
-      <UserProvider>
-        <Router />
-      </UserProvider>
-    </RecoilRoot>
+    <div className="App">
+      <h1>Hello World.</h1>
+      <h2>aaaaaaaaaaaaaaaa</h2>
+    </div>
   );
 };
 
