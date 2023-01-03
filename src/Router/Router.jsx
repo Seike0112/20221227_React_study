@@ -1,38 +1,24 @@
-import { Routes, Route } from "react-router-dom";
-
-// ホームコンポーネント
-import {Home} from "../Components/Home/Home";
-import { Page404 } from "../Components/Other/Page404";
-
-// ページごとのRouteコンポーネント
-import { page1Routes } from "./Page1Routes";
-import { page2Routes } from "./Page2Routes";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { Top } from "../components/pages/Top";
+import { Users } from "../components/pages/Users";
+import { DefaultLayout } from "../components/templates/DefaultLayout";
+import { HeaderOnly } from "../components/templates/HeaderOnly";
 
 export const Router = () => {
   return (
-    <Routes>
-      <Route index element={<Home />} />
-      <Route exact path="/page1">
-        {page1Routes.map((route) => (
-          <Route 
-            key={route.path}
-            index={true}
-            path={route.path} 
-            element={route.children} 
-          />
-        ))}
-      </Route>
-      <Route exact path="/page2">
-        {page2Routes.map((route) => (
-          <Route 
-            key={route.path}
-            index={true}
-            path={route.path} 
-            element={route.children} 
-          />
-        ))}
-      </Route>
-      <Route path="*" element={<Page404 />} />
-    </Routes>
-  );
-};  
+    <BrowserRouter>
+      <Routes>
+        <Route exact path="/" element={
+          <DefaultLayout>
+            <Top />
+          </DefaultLayout>
+        } />
+        <Route path="/users" element={
+          <HeaderOnly>
+            <Users />
+          </HeaderOnly>
+        } />
+      </Routes>
+    </BrowserRouter>
+  )
+};
